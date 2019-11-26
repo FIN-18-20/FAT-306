@@ -1,0 +1,4 @@
+Changer les credentials dans la connexion à la db (database.php)
+Enelever les requêtes en trop sur database.php
+Ajouter les requêtes nécessaires au CDC (database.php)
+Associer les requêtes au boutons (menu.php)
