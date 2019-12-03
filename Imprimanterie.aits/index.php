@@ -27,13 +27,13 @@ class MainController {
      */
     public function dispatch() {
 
-        if (!isset($_GET['controller'])) {
-            $_GET['controller'] = 'home';
-            $_GET['action'] = 'list';
+        if (!isset($_POST['controller'])) {
+            $_POST['controller'] = 'home';
+            $_POST['action'] = 'list';
         }
 
 
-        $currentLink = $this->menuSelected($_GET['controller']);
+        $currentLink = $this->menuSelected($_POST['controller']);
         $this->viewBuild($currentLink);
     }
 
@@ -47,7 +47,7 @@ class MainController {
 
         //possibilité d'ajouter d'autres contrôleurs
         
-        switch($_GET['controller']){
+        switch($page){
             case 'home':
                 $link = new HomeController();
                 break;

@@ -19,8 +19,11 @@ class HomeController extends Controller
      */
     public function display()
     {
-
-        $action = $_GET['action'] . "Action";
+        if (isset($_POST["action"])) {
+            $action = $_POST['action'] . "Action";
+        } else {
+            $action = "indexAction";
+        }
 
         return call_user_func(array($this, $action));
     }
@@ -42,44 +45,7 @@ class HomeController extends Controller
         return $content;
     }
 
-    /**
-     * Display Contact Action
-     *
-     * @return string
-     */
-    private function contactAction()
-    {
-
-        $view = file_get_contents('view/page/home/contact.php');
-
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
-    }
-
-    /**
-     * Check Form action
-     *
-     * @return string
-     */
-    private function checkAction()
-    {
-
-        $lastName = htmlspecialchars($_POST['lastName']);
-        $firstName = htmlspecialchars($_POST['firstName']);
-        $answer = htmlspecialchars($_POST['answer']);
-
-        $view = file_get_contents('view/page/home/resume.php');
-
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
-
-        return $content;
-    }
+    //deux fonctions checkAction et contactAction vivaient ici
 
     /**
      * Rechercher les données et les passe à la vue (en liste)
@@ -92,23 +58,60 @@ class HomeController extends Controller
         // Instancie le modèle et va chercher les informations
         $db = new database();
 
-        if(isset($_GET["table"])){
+        if (isset($_POST["table"])) {
 
-            switch ($_GET["table"]) {
+            switch ($_POST["table"]) {
                 case 't_teacher':
                     $table = $db->fetchTable();
                     break;
-    
+
                 case 't_nickname':
-                    $table = $db->fetchNickTable();
+                    $table = $db->fetchBrandTable();
                     break;
-    
+
+                case 'fetchConsByPrint':
+                    $table = $db->fetchConsByPrint();
+                    break;
+
+                case 'fetchConsByCons':
+                    $table = $db->fetchConsByCons();
+                    break;
+
+                case 'fetchFastest':
+                    $table = $db->fetchFastest();
+                    break;
+
+                case 'fetchBestResolution':
+                    $table = $db->fetchBestResolution();
+                    break;
+
+                case 'fetchByBrand':
+                    if (!isset($_POST["brandNames"]) || empty($_POST["brandNames"])) {
+                        $_POST["brandNames"] = "Epson";
+                    }
+                    $table = $db->fetchByBrand($_POST["brandNames"]);
+                    break;
+
+                case 'fetchByBrandModel':
+                    if (!isset($_POST["brandNames"]) || empty($_POST["brandNames"])) {
+                        $_POST["brandNames"] = "Epson";
+                    }
+                    $table = $db->fetchByBrandModel($_POST["brandNames"]);
+                    break;
+
+                case 'fetchByBrandPrice':
+                    if (!isset($_POST["brandNames"]) || empty($_POST["brandNames"])) {
+                        $_POST["brandNames"] = "Epson";
+                    }
+                    $table = $db->fetchByBrandPrice($_POST["brandNames"]);
+                    break;
+
                 default:
                     $table = $db->fetchTable();
                     break;
             }
-        } else{
-            $table = $db->fetchNickTable();
+        } else {
+            $table = $db->fetchBrandTable();
         }
 
 
