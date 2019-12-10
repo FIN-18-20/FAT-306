@@ -163,20 +163,60 @@ class database{
     }
 
     function fetchFastest(){
-        $query="SELECT t_printer.priModel AS 'Modèle', t_printer.priSpeedBW AS 'Vitesse d\'impression NB (ppm)'
+        $query="SELECT t_printer.priModel AS 'Modèle', t_printer.priSpeedBW AS 'Vitesse d\'impression NB (ppm)', t_printer.priSpeedColor AS 'Vitesse d\'impression couleur (ppm)'
         FROM t_printer
-        ORDER BY t_printer.priSpeedBW DESC
-        En couleur:
-        SELECT t_printer.priModel AS 'Modèle', t_printer.priSpeedColor AS 'Vitesse d\'impression couleur (ppm)'
-        FROM t_printer
-        ORDER BY t_printer.priSpeedColor DESC; ";
+        ORDER BY t_printer.priSpeedBW DESC;";
 
         $this->queryExecute($query);
         return $this->fetchData(PDO::FETCH_ASSOC);
     }
 
+    function fetchFilteredSpecs($spec, $direction){
 
+        //switch pour Croissant/Décroissant
+        switch($direction){
+            case '<':
+                $order = 'ASC';
+            break;
 
+            case '>':
+                $order = 'DESC';
+            break;
+
+            default:
+            $order = 'ASC';
+        }
+
+        //switch pour le spec
+        switch($spec){
+            case 'weight':
+                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
+                $query .= " $order;";
+            break;
+
+            case 'height':
+                $query = "SELECT t_printer.priModel AS 'Modele', (t_printer.priHeight*t_printer.priWidth*t_printer.priDepth / 1000) AS 'Taille (cm3)' FROM t_printer ORDER BY (t_printer.priHeight*t_printer.priWidth*t_printer.priDepth / 1000)";
+                $query .= " $order;";
+            break;
+
+            case 'price':
+                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix' FROM t_printer ORDER BY Prix ";
+                $query .= $order;
+                //utile que pour suivre à la lettre le CDC
+                //$query .= " LIMIT 3;";
+            break;
+
+            default:
+            $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
+            $query .= " $order;";
+        break;
+
+            }
+
+            //retour de la requête
+            $this->queryExecute($query);
+            return $this->fetchData(PDO::FETCH_ASSOC);
+    }
 
 
 }

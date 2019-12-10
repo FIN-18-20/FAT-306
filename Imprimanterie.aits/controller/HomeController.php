@@ -106,6 +106,19 @@ class HomeController extends Controller
                     $table = $db->fetchByBrandPrice($_POST["brandNames"]);
                     break;
 
+                case 'filter':
+                    if (!isset($_POST["spec"]) || empty($_POST["spec"])) {
+                        $_POST["spec"] = "weight";
+                    }
+
+                    if (!isset($_POST["order"]) || empty($_POST["order"])) {
+                        $_POST["order"] = "<";
+                    }
+
+                    $table = $db->fetchFilteredSpecs($_POST["spec"], $_POST["order"]);
+                break;
+
+
                 default:
                     $table = $db->fetchTable();
                     break;
