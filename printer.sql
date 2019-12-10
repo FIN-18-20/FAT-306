@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 26 Novembre 2019 à 10:56
+-- Généré le :  Mar 10 Décembre 2019 à 09:21
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -98,9 +98,42 @@ CREATE TABLE `t_customer` (
 CREATE TABLE `t_history` (
   `idHistory` int(11) NOT NULL,
   `hisPrice` float NOT NULL,
-  `hisYear` date NOT NULL,
+  `hisYear` year(4) NOT NULL,
   `idPrinter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `t_history`
+--
+
+INSERT INTO `t_history` (`idHistory`, `hisPrice`, `hisYear`, `idPrinter`) VALUES
+(1, 68.9, 2017, 1),
+(2, 71.9, 2018, 1),
+(3, 73.9, 2019, 1),
+(4, 124.9, 2017, 2),
+(5, 129.9, 2018, 2),
+(6, 132.9, 2019, 2),
+(7, 87.9, 2017, 3),
+(8, 77.9, 2018, 3),
+(9, 61.9, 2019, 3),
+(10, 269, 2017, 4),
+(11, 294, 2018, 4),
+(12, 261.95, 2019, 4),
+(13, 68.14, 2017, 5),
+(14, 61.5, 2018, 5),
+(15, 64.6, 2019, 5),
+(16, 45.6, 2017, 6),
+(17, 40.6, 2018, 6),
+(18, 43.5, 2019, 6),
+(19, 62.9, 2017, 7),
+(20, 66.9, 2018, 7),
+(21, 67.9, 2019, 7),
+(22, 120.5, 2017, 8),
+(23, 125.6, 2018, 8),
+(24, 128.99, 2019, 8),
+(25, 126.95, 2017, 9),
+(26, 134.9, 2018, 9),
+(27, 111.9, 2019, 9);
 
 -- --------------------------------------------------------
 
@@ -315,7 +348,7 @@ ALTER TABLE `t_customer`
 -- AUTO_INCREMENT pour la table `t_history`
 --
 ALTER TABLE `t_history`
-  MODIFY `idHistory` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idHistory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT pour la table `t_manufacturer`
 --
@@ -330,7 +363,7 @@ ALTER TABLE `t_order`
 -- AUTO_INCREMENT pour la table `t_printer`
 --
 ALTER TABLE `t_printer`
-  MODIFY `idPrinter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idPrinter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `t_supplier`
 --
