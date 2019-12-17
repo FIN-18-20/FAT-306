@@ -10,7 +10,7 @@ class database{
         try {
             $this->connector = new PDO('mysql:host=localhost;dbname=printer;charset=utf8', 'root', 'root');
         } catch (PDOException $e) {
-            print("Erreur: " . $e);
+            print("Error: " . $e);
             die('Erreur: ' + $e->getMessage());
         }
     }
