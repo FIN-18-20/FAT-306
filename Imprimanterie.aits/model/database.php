@@ -193,7 +193,7 @@ class database{
     }
 
     function fetchByPriceEvo($braName){
-        $query = "SELECT t_printer.idPrinter, t_printer.priModel, t_history.idHistory, t_history.hisPrice, t_history.hisYear FROM t_printer INNER JOIN t_history ON t_printer.idPrinter = t_history.idPrinter INNER JOIN t_brand ON t_printer.idBrand = t_brand.idBrand WHERE t_brand.braName = :braName ORDER BY t_printer.priModel DESC";
+        $query = "SELECT t_printer.priModel AS 'Modèle', t_history.hisPrice AS 'Prix', t_history.hisYear AS 'Année' FROM t_printer INNER JOIN t_history ON t_printer.idPrinter = t_history.idPrinter INNER JOIN t_brand ON t_printer.idBrand = t_brand.idBrand WHERE t_brand.braName = :braName ORDER BY t_printer.priModel DESC, t_history.hisYear ASC";
 
         $params = array(array("name"=> "braName", "value"=> $braName, "type"=> PDO::PARAM_STR));
 

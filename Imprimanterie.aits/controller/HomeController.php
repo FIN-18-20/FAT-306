@@ -58,6 +58,7 @@ class HomeController extends Controller
         // Instancie le modèle et va chercher les informations
         $db = new database();
 
+        //table est le nom des boutons submit qui ont chacun une valeure différente (voir view/menu.php)
         if (isset($_POST["table"])) {
 
             switch ($_POST["table"]) {
