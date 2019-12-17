@@ -58,6 +58,7 @@ function selectSelected($selectName, $postKey)
 				<?php 
 					createLink(array(array("name" => "table", "value" => "fetchFastest")), "Vitesse d'impression");
 					createLink(array(array("name" => "table", "value" => "fetchBestResolution")), "Résolution");
+					createLink(array(array("name" => "table", "value" => "fetchBestSales")), "Statistiques de ventes");
 					?>
 			</div>
 			<!-- Filtre par marque/constructeur -->
@@ -78,7 +79,7 @@ function selectSelected($selectName, $postKey)
 					?>
 				</select>
 				<button class="btn btn-primary mx-4" type="submit" name="table" value="fetchByBrand">Par marque détaillé</button>
-				<button class="btn btn-primary mx-4" type="submit" name="table" value="fetchByBrandModel">Par constructeur</button>
+				<button class="btn btn-primary mx-4" type="submit" name="table" value="fetchByPriceEvo">Par évolution des prix</button>
 				<button class="btn btn-primary mx-4" type="submit" name="table" value="fetchByBrandPrice">Par constructeur et par prix</button>
 			</form>
 			</div>

@@ -10,7 +10,7 @@ class database{
         try {
             $this->connector = new PDO('mysql:host=localhost;dbname=printer;charset=utf8', 'root', 'root');
         } catch (PDOException $e) {
-            print("Error: " . $e);
+            print("Erreur: " . $e);
             die('Erreur: ' + $e->getMessage());
         }
     }
@@ -183,6 +183,22 @@ class database{
             //retour de la requête
             $this->queryExecute($query);
             return $this->fetchData(PDO::FETCH_ASSOC);
+    }
+
+    function fetchBestSales(){
+        $query = "SELECT t_printer.priModel AS 'Modèle', SUM(concern.Quantity) AS 'Ventes sur les 3 dernières années' FROM t_printer INNER JOIN concern ON concern.idPrinter = t_printer.idPrinter INNER JOIN t_order ON concern.idOrder = t_order.idOrder INNER JOIN t_customer ON t_order.idCustomer = t_customer.idCustomer WHERE (DATE_FORMAT(NOW(), \"%Y\")-DATE_FORMAT(t_order.ordDate, \"%Y\")) <= 3 GROUP BY t_printer.priModel ORDER BY SUM(concern.Quantity) DESC";
+
+        $this->queryExecute($query);
+        return $this->fetchData(PDO::FETCH_ASSOC);
+    }
+
+    function fetchByPriceEvo($braName){
+        $query = "SELECT t_printer.idPrinter, t_printer.priModel, t_history.idHistory, t_history.hisPrice, t_history.hisYear FROM t_printer INNER JOIN t_history ON t_printer.idPrinter = t_history.idPrinter INNER JOIN t_brand ON t_printer.idBrand = t_brand.idBrand WHERE t_brand.braName = :braName ORDER BY t_printer.priModel DESC";
+
+        $params = array(array("name"=> "braName", "value"=> $braName, "type"=> PDO::PARAM_STR));
+
+        $this->prepareExecute($query, $params);
+        return $this->fetchData(PDO::FETCH_ASSOC);
     }
 
 
