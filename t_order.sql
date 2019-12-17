@@ -71,8 +71,7 @@ ALTER TABLE `t_order`
 --
 -- Contraintes pour la table `t_order`
 --
-ALTER TABLE `t_order`
-  ADD CONSTRAINT `FKassign_FK` FOREIGN KEY (`idCustomer`) REFERENCES `t_customer` (`idCustomer`);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
