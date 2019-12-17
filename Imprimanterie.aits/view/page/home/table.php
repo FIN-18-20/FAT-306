@@ -1,6 +1,5 @@
 <div class="container">
 
-<h2 class="text-6xl font-bold my-4">Tri par ventes</h2>
 	<div class="row">
 		<table class=" table">
         <?php

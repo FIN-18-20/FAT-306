@@ -1,5 +1,11 @@
 <?php
 
+/*
+* Auteur: CHP
+* Date: 19.11.2019
+* Description: Adatation du site au projet 042-GesProj2
+*/
+
 class database{
 
     protected $connector;
@@ -110,11 +116,11 @@ class database{
     }
 
     function fetchConsByCons(){
-        $query="SELECT t_printer.priModel AS 'Modèle', t_consumable.conModel AS 'Cartouche'
+        $query="SELECT t_consumable.conModel AS 'Cartouche', t_printer.priModel AS 'Modèle'
         FROM t_printer
         RIGHT JOIN uses ON t_printer.idPrinter = uses.idPrinter
         RIGHT JOIN t_consumable ON uses.idConsumable = t_consumable.idConsumable
-        ORDER BY t_printer.priModel ASC;";
+        ORDER BY t_consumable.idConsumable ASC;";
 
         $this->queryExecute($query);
         return $this->fetchData(PDO::FETCH_ASSOC);
@@ -157,7 +163,7 @@ class database{
         //switch pour le spec
         switch($spec){
             case 'weight':
-                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
+                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso (automatique/manuel)',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
                 $query .= " $order;";
             break;
 
@@ -193,7 +199,7 @@ class database{
     }
 
     function fetchByPriceEvo($braName){
-        $query = "SELECT t_printer.idPrinter, t_printer.priModel, t_history.idHistory, t_history.hisPrice, t_history.hisYear FROM t_printer INNER JOIN t_history ON t_printer.idPrinter = t_history.idPrinter INNER JOIN t_brand ON t_printer.idBrand = t_brand.idBrand WHERE t_brand.braName = :braName ORDER BY t_printer.priModel DESC";
+        $query = "SELECT t_printer.priModel AS 'Modèle', t_history.hisPrice AS 'Prix', t_history.hisYear AS 'Année' FROM t_printer INNER JOIN t_history ON t_printer.idPrinter = t_history.idPrinter INNER JOIN t_brand ON t_printer.idBrand = t_brand.idBrand WHERE t_brand.braName = :braName ORDER BY t_printer.priModel DESC, t_history.hisYear ASC";
 
         $params = array(array("name"=> "braName", "value"=> $braName, "type"=> PDO::PARAM_STR));
 

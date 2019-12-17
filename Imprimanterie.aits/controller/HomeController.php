@@ -5,6 +5,12 @@
  * Auteur : Cindy Hardegger
  * Date: 22.01.2019
  * Controler pour gérer les pages classiques
+ * 
+ * Version 2.0
+ * Auteur: CHP
+ * Date: 19.11.2019
+ * Description: Adatation du site au projet 042-GesProj2
+ * 
  */
 
 include_once 'model/database.php';
@@ -22,7 +28,7 @@ class HomeController extends Controller
         if (isset($_POST["action"])) {
             $action = $_POST['action'] . "Action";
         } else {
-            $action = "indexAction";
+            $action = "listAction";
         }
 
         return call_user_func(array($this, $action));
@@ -45,8 +51,6 @@ class HomeController extends Controller
         return $content;
     }
 
-    //deux fonctions checkAction et contactAction vivaient ici
-
     /**
      * Rechercher les données et les passe à la vue (en liste)
      *
@@ -58,17 +62,10 @@ class HomeController extends Controller
         // Instancie le modèle et va chercher les informations
         $db = new database();
 
+        //table est le nom des boutons submit qui ont chacun une valeure différente (voir view/menu.php)
         if (isset($_POST["table"])) {
 
             switch ($_POST["table"]) {
-                case 't_teacher':
-                    $table = $db->fetchTable();
-                    break;
-
-                case 't_nickname':
-                    $table = $db->fetchBrandTable();
-                    break;
-
                 case 'fetchConsByPrint':
                     $table = $db->fetchConsByPrint();
                     break;
@@ -124,11 +121,11 @@ class HomeController extends Controller
 
 
                 default:
-                    $table = $db->fetchTable();
+                    $table = $db->fetchBestSales();
                     break;
             }
         } else {
-            $table = $db->fetchBrandTable();
+            $table = $db->fetchBestSales();
         }
 
 
