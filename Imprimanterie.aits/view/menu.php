@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * ETML
+ * Auteur: CHP
+ * Date: 19.11.2019
+ * Description: Modèle permettant d'intéragir avec la base de données
+ * 
+ */
+
+
+/**
  * Création de liens envoyant des données en POST
  *
  * @param [array(array())] $params tableau de tableaux associatifs avec chacun "name" et "value"
@@ -36,14 +45,6 @@ function selectSelected($selectName, $postKey)
 
 	<h2 class="text-6xl font-bold py-8">Bienvenue à la connaissance !</h2>
 	<div class="row">
-		<!-- Boutons de test -->
-<!-- 		<div class="flex flex-col">
-			<div class="flex justify-center content-center bg-gray-300 p-4 rounded">
-				<?php /* 
-				createLink(array(array("name" => "table", "value" => "t_teacher")), "Tout afficher");
-				createLink(array(array("name" => "table", "value" => "t_nickname")), "Afficher les fournisseurs"); */
-				?>
-			</div> -->
 			<!-- Section consommables -->
 			<div class="flex justify-center content-center my-4 bg-gray-300 p-4 rounded">
 				<p class="text-center">Consommables: </p>

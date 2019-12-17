@@ -1,5 +1,11 @@
 <?php
 
+/*
+* Auteur: CHP
+* Date: 19.11.2019
+* Description: Adatation du site au projet 042-GesProj2
+*/
+
 class database{
 
     protected $connector;
@@ -157,7 +163,7 @@ class database{
         //switch pour le spec
         switch($spec){
             case 'weight':
-                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
+                $query = "SELECT priModel AS 'Modèle',priPrice AS 'Prix',priSpeedColor AS 'Vitesse d\'impression couleurs',priSpeedBW AS 'Vitesse d\'impression noir et blanc',priResolutionX AS 'Resolution scanner',priDoubleSided AS 'Recto-verso (automatique/manuel)',priHeight AS 'Hauteur',priDepth AS 'Profondeur',priWidth AS 'Largeur',priWeight AS 'Poids',priDate AS 'Date' FROM t_printer ORDER BY t_printer.priWeight";
                 $query .= " $order;";
             break;
 
