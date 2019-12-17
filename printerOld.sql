@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 17 Décembre 2019 à 08:23
+-- Généré le :  Mar 10 Décembre 2019 à 09:21
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -30,27 +30,8 @@ USE `printer`;
 
 CREATE TABLE `concern` (
   `idOrder` int(11) NOT NULL,
-  `idPrinter` int(11) NOT NULL,
-  `Quantity` int(11) NOT NULL
+  `idPrinter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `concern`
---
-
-INSERT INTO `concern` (`idOrder`, `idPrinter`, `Quantity`) VALUES
-(1, 1, 10),
-(1, 5, 5),
-(1, 9, 7),
-(2, 3, 20),
-(2, 6, 15),
-(2, 8, 50),
-(3, 1, 36),
-(3, 2, 24),
-(3, 4, 60),
-(3, 6, 100),
-(3, 8, 45),
-(3, 9, 12);
 
 -- --------------------------------------------------------
 
@@ -96,28 +77,6 @@ CREATE TABLE `t_consumable` (
   `conPrice` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `t_consumable`
---
-
-INSERT INTO `t_consumable` (`idConsumable`, `conModel`, `conPrice`) VALUES
-(1, 'Brother LC-3213BK (Noir)', 15.8),
-(2, 'Brother LC-3211VAL (Couleur/Noir)', 49.95),
-(3, 'Epson Etoile de mer 603 Pack Couleur/Noir', 44.28),
-(4, 'Epson Etoile de mer 603 Pack XL Couleur/Noir', 82.43),
-(5, 'HP 62 Pack XL Couleur/Noir', 75.22),
-(6, 'HP 62 Couleur', 27.79),
-(7, 'HP 62 Noir', 19.54),
-(8, 'HP 302 Pack Couleur/Noir', 36.1),
-(9, 'HP 302 Noir', 21.61),
-(10, 'HP 302 Couleur', 20.62),
-(11, 'HP 303 Pack Couleur/Noir', 40.16),
-(12, 'HP 303 Couleur', 26.81),
-(13, 'HP 303 Noir', 19.54),
-(14, 'HP 304 Pack Couleur/Noir', 24),
-(15, 'HP 304 Noir', 15),
-(16, 'HP 304 Couleur', 15);
-
 -- --------------------------------------------------------
 
 --
@@ -129,13 +88,6 @@ CREATE TABLE `t_customer` (
   `cusName` varchar(50) NOT NULL,
   `cusFirstname` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `t_customer`
---
-
-INSERT INTO `t_customer` (`idCustomer`, `cusName`, `cusFirstname`) VALUES
-(1, 'Hayslip', 'Corboi');
 
 -- --------------------------------------------------------
 
@@ -216,15 +168,6 @@ CREATE TABLE `t_order` (
   `idCustomer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `t_order`
---
-
-INSERT INTO `t_order` (`idOrder`, `ordDate`, `ordWaranty`, `idCustomer`) VALUES
-(1, '2018-11-07', 2, 1),
-(2, '2019-04-17', 2, 1),
-(3, '2019-07-30', 2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -293,31 +236,6 @@ CREATE TABLE `uses` (
   `idConsumable` int(11) NOT NULL,
   `idPrinter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `uses`
---
-
-INSERT INTO `uses` (`idConsumable`, `idPrinter`) VALUES
-(1, 9),
-(2, 9),
-(3, 8),
-(4, 6),
-(4, 7),
-(4, 8),
-(5, 4),
-(6, 4),
-(7, 4),
-(8, 3),
-(9, 3),
-(10, 3),
-(11, 1),
-(11, 2),
-(12, 2),
-(13, 2),
-(14, 5),
-(15, 5),
-(16, 5);
 
 --
 -- Index pour les tables exportées
@@ -420,12 +338,12 @@ ALTER TABLE `t_brand`
 -- AUTO_INCREMENT pour la table `t_consumable`
 --
 ALTER TABLE `t_consumable`
-  MODIFY `idConsumable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idConsumable` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_customer`
 --
 ALTER TABLE `t_customer`
-  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_history`
 --
@@ -440,7 +358,7 @@ ALTER TABLE `t_manufacturer`
 -- AUTO_INCREMENT pour la table `t_order`
 --
 ALTER TABLE `t_order`
-  MODIFY `idOrder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idOrder` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `t_printer`
 --
