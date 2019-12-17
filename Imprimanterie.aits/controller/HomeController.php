@@ -92,11 +92,11 @@ class HomeController extends Controller
                     $table = $db->fetchByBrand($_POST["brandNames"]);
                     break;
 
-                case 'fetchByBrandModel':
+                case 'fetchByPriceEvo':
                     if (!isset($_POST["brandNames"]) || empty($_POST["brandNames"])) {
                         $_POST["brandNames"] = "Epson";
                     }
-                    $table = $db->fetchByBrandModel($_POST["brandNames"]);
+                    $table = $db->fetchByPriceEvo($_POST["brandNames"]);
                     break;
 
                 case 'fetchByBrandPrice':
@@ -116,6 +116,10 @@ class HomeController extends Controller
                     }
 
                     $table = $db->fetchFilteredSpecs($_POST["spec"], $_POST["order"]);
+                break;
+
+                case 'fetchBestSales':
+                    $table  = $db->fetchBestSales();
                 break;
 
 
