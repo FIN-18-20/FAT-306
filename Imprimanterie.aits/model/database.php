@@ -110,11 +110,11 @@ class database{
     }
 
     function fetchConsByCons(){
-        $query="SELECT t_printer.priModel AS 'Modèle', t_consumable.conModel AS 'Cartouche'
+        $query="SELECT t_consumable.conModel AS 'Cartouche', t_printer.priModel AS 'Modèle'
         FROM t_printer
         RIGHT JOIN uses ON t_printer.idPrinter = uses.idPrinter
         RIGHT JOIN t_consumable ON uses.idConsumable = t_consumable.idConsumable
-        ORDER BY t_printer.priModel ASC;";
+        ORDER BY t_consumable.idConsumable ASC;";
 
         $this->queryExecute($query);
         return $this->fetchData(PDO::FETCH_ASSOC);
